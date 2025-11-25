@@ -1,0 +1,208 @@
+/* 固定整個頁面尺寸 */
+html, body {
+    width: 380px;
+    height: 640px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+/* 主要內容容器固定尺寸，超出部分可捲動 */
+.container {
+    width: 380px;
+    height: 640px;
+    margin: 0 auto;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    font-family: sans-serif;
+    position: relative;
+    /* 底部留一點空間，避免最下面的東西被擋住 */
+    padding-bottom: 10px; 
+}
+
+/* 上方標題列: 放圖片 + 文字 */
+.title-column {
+    background: #309bff;
+    padding: 8px 0 8px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px; /* 圖示和文字之間的距離 */
+    margin-bottom: 20px;
+}
+
+/* 圖片 */
+.icon {
+    width: 100px;
+    height: 100px;
+    background: #ffffff;               /* 白底 */
+    border-radius: 8px;                /* 圓角方形 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;                  /* 圖片超出圓形部分裁掉 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+/* 圖片本身 */
+.icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;                 /* 保持圖片比例並填滿圓形 */
+}
+
+/* 圖片群組（水平排列） */
+.icon-group {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+}
+
+/* 左邊圖片：左圓角、右直角 */
+.icon-left {
+    width: 160px;
+    height: 160px;
+    background: white;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 右邊圖片：右圓角、左直角，可調大小 */
+.icon-right {
+    width:140px;   /* 可自由調整 */
+    height: 160px;
+    background: white;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 圖片本身都填滿容器 */
+.icon-left img, .icon-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 保持圖片比例完整，不裁切 */
+}
+
+h1 {
+    margin-top: 15px;
+    font-size: 30px;
+    color: #ffffff;   /* 白色字體 */
+    font-weight: 600;
+}
+
+/* 使用方法區 */
+.guide {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.guide ol {
+    padding-left: 18px;  /* 編號與文字間距 */
+    line-height: 1.6;    /* 行距 */
+    font-size: 16px;      /* 文字大小 */
+}
+
+.guide b {
+    font-size: 18px;  /* 使用方法標題更大 */
+}
+
+/* 輸入欄位 */
+.input-group {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column; /* label 在上，input 在下 */
+}
+
+.input-group label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 4px;
+    font-weight: 500;
+    display: flex;
+    align-items: center; /* 圖示與文字垂直置中 */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* 兩個按鈕 */
+.btn-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    width: 48%;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* 綁定按鈕 */
+.bind-btn {
+    background: #4CAF50;
+}
+
+/* 綁定按鈕不可用 */
+.bind-btn.disabled {
+    background: #bbb;
+    cursor: not-allowed;
+}
+
+/* 解除按鈕 */
+.unbind-btn {
+    background: #c9180cd4;
+}
+
+/* 頁尾 */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    /* 預設 bottom: 5px; 但我們希望和按鈕再多隔一點，就給 margin-top 10px */
+    margin-top: 50px; 
+    margin-bottom: 5px;
+  }
+  
+  .footer img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }

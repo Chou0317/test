@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<!-- 設定手機響應式視窗大小，禁止縮放 -->
+<meta name="viewport" content="width=400, height=640, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>CFB</title>
+
+<!-- 外部 CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- 處理帳號綁定/解除邏輯 -->
+<script>
+    // 等待整個頁面載入完成再執行
+    window.onload = () => {
+        // 取得帳號與密碼輸入框元素
+        const accInput = document.getElementById("account");
+        const pwdInput = document.getElementById("password");
+
+        // 取得綁定與解除按鈕元素
+        const bindBtn = document.getElementById("bindBtn");
+        const unbindBtn = document.getElementById("unbindBtn");
+    
+        // --- 頁面載入時檢查 localStorage 是否已有綁定資料 ---
+        const savedAcc = localStorage.getItem("account");  // 取得已儲存的帳號
+        if (savedAcc) {
+            accInput.value = savedAcc;          // 顯示帳號
+            pwdInput.value = "********";        // 密碼以亂碼顯示，保護隱私
+
+            bindBtn.classList.add("disabled");  // 綁定按鈕改為灰色不可點
+            bindBtn.disabled = true;
+
+            // 帳號與密碼變成只讀
+            accInput.readOnly = true;
+            pwdInput.readOnly = true;
+        }
+    
+        // --- 綁定按鈕功能 ---
+        bindBtn.onclick = () => {
+            const acc = accInput.value.trim();   // 去除帳號前後空白
+            const pwd = pwdInput.value.trim();   // 去除密碼前後空白
+
+            // 如果帳號或密碼為空，提示使用者
+            if (acc === "" || pwd === "") { 
+                alert("請輸入帳號與密碼"); 
+                return; 
+            }
+
+            // 將帳號與密碼存入 localStorage（本地瀏覽器儲存）
+            localStorage.setItem("account", acc);
+            localStorage.setItem("password", pwd);
+
+            pwdInput.value = "********";        // 密碼顯示為亂碼
+            bindBtn.classList.add("disabled");  // 綁定按鈕變灰不可點
+            bindBtn.disabled = true;
+
+            // 綁定後欄位不可編輯
+            accInput.readOnly = true;
+            pwdInput.readOnly = true;
+
+            alert("綁定成功");                  // 提示使用者綁定成功
+        };
+    
+        // --- 解除按鈕功能 ---
+        unbindBtn.onclick = () => {
+            // 移除 localStorage 中的帳號與密碼
+            localStorage.removeItem("account");
+            localStorage.removeItem("password");
+
+            // 清空輸入框
+            accInput.value = "";
+            pwdInput.value = "";
+
+            // 綁定按鈕恢復可點
+            bindBtn.classList.remove("disabled");
+            bindBtn.disabled = false;
+
+            // 解除後欄位可編輯
+            accInput.readOnly = false;
+            pwdInput.readOnly = false;
+
+            alert("已解除綁定");                // 提示使用者解除成功
+        };
+    };
+</script>
+</head>
+
+<body>
+<div class="container">
+    <!-- === 上方標題區塊：圖示＋標題 === -->
+    <div class="title-column">
+        <div class="icon-group">
+            <div class="icon-left">
+                <img src="images/DPS_logo.jpg" alt="">
+            </div>
+            <div class="icon-right">
+                <img src="images/fire1.png" alt="">
+            </div>
+        </div>
+
+        <!-- 標題文字 -->
+        <h1>CFB監控LINE服務</h1>
+    </div>
+
+    <!-- === 使用方法說明區塊 === -->
+    <div class="guide">
+        <b>使用方法：</b>
+        <ol>
+            <li>輸入CFB平台的帳號與密碼。</li>
+            <li>按下「綁定」後，將會與Line串聯。</li>
+            <li>需先按「解除」，再重新輸入帳號密碼。</li>
+            <li>綁定後會收到防火毯異常警訊通知。</li>
+        </ol>
+    </div>
+
+    <!-- === 帳號密碼輸入區塊 === -->
+    <!-- 帳號 -->
+    <div class="input-group">
+        <label for="account">👤 帳號</label>
+        <input type="text" id="account" placeholder="請輸入帳號">
+    </div>
+
+    <!-- 密碼 -->
+    <div class="input-group">
+        <label for="password">🔒 密碼</label>
+        <input type="password" id="password" placeholder="請輸入密碼">
+    </div>
+
+    <!-- === 綁定 / 解除按鈕區塊 === -->
+    <div class="btn-area">
+        <button class="bind-btn" id="bindBtn">綁定</button>
+        <button class="unbind-btn" id="unbindBtn">解除</button>
+    </div>
+
+    <!-- === 頁尾顯示區：圖示 + 公司名稱 === -->
+    <div class="footer">
+        <!-- 公司 Logo 圖片 -->
+        <img src="images/dps.png" alt="dps-icon">
+
+        <!-- 公司名稱與網址 -->
+        <span>中保防災科技股份有限公司 www.dps.tw</span>
+    </div>
+
+</div>
+</body>
+</html>
+
